@@ -1,0 +1,105 @@
+Procedure SetWallpaper(FileName.s, TempFileBMP.s, BackgroundColor.l = $FFFFFF, Mode.l = 1)  ; Mode: 1=Etirer, 2: Proportionnel, 3:Mosaïque
+  Protected ImageIn.l, ImageOut.l, W, H
+  
+  ImageIn = LoadImage(#PB_Any , FileName)
+   If IsImage(ImageIn)
+    W = ImageWidth(ImageIn)
+    H = ImageHeight(ImageIn)
+    WS = GetSystemMetrics_(#SM_CXSCREEN )
+    HS = GetSystemMetrics_(#SM_CYSCREEN )
+     If Mode = 1 ; ETIRER
+         ResizeImage(ImageIn, WS, HS, #PB_Image_Smooth )
+         If SaveImage(ImageIn, TempFileBMP, #PB_ImagePlugin_BMP )
+            FileName = TempFileBMP
+         Else
+            Warning("Can't convert image to BMP file !" )
+         EndIf
+     ElseIf Mode = 2 ; PROPORTIONNEL
+        ImageOut = CreateImage(#PB_Any , WS, HS)
+         If StartDrawing(ImageOutput(ImageOut))
+            Box(0, 0, WS, HS, BackgroundColor)
+            WC.f = WS / W
+            HC.f = HS / H
+             If WC > HC
+                 DrawImage(ImageID(ImageIn), Round((WS - Round(HC * W, 0)) / 2, 0), 0, Round(HC * W, 0), HS)
+             Else
+                 DrawImage(ImageID(ImageIn), 0, Round((HS - Round(WC * H, 0)) / 2, 0), WS, Round(WC * H, 0))
+             EndIf
+             StopDrawing()
+             If SaveImage(ImageOut, TempFileBMP, #PB_ImagePlugin_BMP )
+                FileName = TempFileBMP
+             Else
+                Warning("Can't convert image to BMP file !" )
+             EndIf
+             FreeImage(ImageOut)
+         EndIf
+     Else ; MOSAIQUE
+        ImageOut = CreateImage(#PB_Any , WS, HS)
+         If StartDrawing(ImageOutput(ImageOut))
+             Box(0, 0, WS, HS, BackgroundColor)
+            Col = Round(WS/W, 1)
+            Row = Round(HS/H, 1)
+             For X = 0 To Col-1
+                 For Y = 0 To Row-1
+                     DrawImage(ImageID(ImageIn), X*W, Y*H)
+                 Next
+             Next
+             StopDrawing()
+             If SaveImage(ImageOut, TempFileBMP, #PB_ImagePlugin_BMP )
+                FileName = TempFileBMP
+             Else
+                Warning("Can't convert image to BMP file !" )
+             EndIf
+             FreeImage(ImageOut)
+         EndIf
+     EndIf
+     FreeImage(ImageIn)
+    SetWallpaperBMP(FileName, "2" )
+     ProcedureReturn #True
+   Else
+    Warning("This file is not a picture or does not exist :" + #CRLF$ + FileName)
+     ProcedureReturn #False
+   EndIf
+EndProcedure
+
+
+Procedure SetWallpaper(FileName.s, TempFileBMP.s, BackgroundColor.l = $FFFFFF)
+  Protected ImageIn.l, ImageOut.l, w, h
+  
+  ImageIn = LoadImage(#PB_Any, FileName)
+  If ImageIn
+    w = ImageWidth(ImageIn)
+    h = ImageHeight(ImageIn)
+    If LCase(GetExtensionPart(FileName)) <> "bmp" Or h >= w
+      If ImageWidth(ImageIn) > ImageHeight(ImageIn)
+        If SaveImage(ImageIn, TempFileBMP, #PB_ImagePlugin_BMP)
+          FileName = TempFileBMP
+        Else
+          Warning("Can't convert image to BMP file !")
+        EndIf
+      Else
+        ImageOut = CreateImage(#PB_Any, 2*w, h)
+        If StartDrawing(ImageOutput(ImageOut))
+          Box(0, 0, 2*w, h, BackgroundColor)
+          Line(5,5, 50,50, $FF)
+          DrawImage(ImageID(ImageIn), w/2, 0)
+          StopDrawing()
+          If SaveImage(ImageOut, TempFileBMP, #PB_ImagePlugin_BMP)
+            FileName = TempFileBMP
+          Else
+            Warning("Can't convert image to BMP file !")
+          EndIf
+          FreeImage(ImageOut)
+        Else
+          Debug "can't draw !"
+        EndIf
+      EndIf
+    EndIf
+    FreeImage(ImageIn)
+    SetWallpaperBMP(FileName, "2")
+    ProcedureReturn #True
+  Else
+    Warning("This file is not a picture or does not exist :" + #CRLF$ + FileName)
+    ProcedureReturn #False
+  EndIf
+EndProcedure

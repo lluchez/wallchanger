@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<parameters version="1.3">
+	<configuration>
+		<delay>30</delay>
+		<startup>1</startup>
+		<display>5</display>
+		<current-group>6</current-group>
+		<current-color>0</current-color>
+		
+		<groups>
+			<group name="Juju in Sweden" url="C:\$DATA$\My Documents\My Pictures\Photos\2007\13 - Göteborg\32 - Valand avec Juju\Juju\">
+				<ban>C:\$DATA$\My Documents\My Pictures\Photos\2007\13 - Göteborg\32 - Valand avec Juju\Juju\DSC08895.JPG</ban>
+				<ban>C:\$DATA$\My Documents\My Pictures\Photos\2007\13 - Göteborg\32 - Valand avec Juju\Juju\DSC08956.JPG</ban>
+				<ban>C:\$DATA$\My Documents\My Pictures\Photos\2007\13 - Göteborg\32 - Valand avec Juju\Juju\DSC08913.JPG</ban>
+				<ban>C:\$DATA$\My Documents\My Pictures\Photos\2007\13 - Göteborg\32 - Valand avec Juju\Juju\DSC08920.JPG</ban>
+			</group>
+			<group name="Cime de Rocassiera" url="C:\$DATA$\My Documents\My Pictures\Photos\2009\18 - Rando - Cime de Rocassiera\">
+			</group>
+			<group name="XP themes" url="C:\$DATA$\My Documents\My Pictures\Others\Arrières plan\XP Black\">
+			</group>
+			<group name="Italy" url="C:\$DATA$\My Documents\My Pictures\Photos\2009\16 - Trip to Italy\">
+				<ban>C:\$DATA$\My Documents\My Pictures\Photos\2009\16 - Trip to Italy\Trip to Italy 010.jpg</ban>
+				<ban>C:\$DATA$\My Documents\My Pictures\Photos\2009\16 - Trip to Italy\Trip to Italy 001.jpg</ban>
+			</group>
+			<group name="Peru" url="C:\$DATA$\My Documents\My Pictures\Photos\2010\10 - Pérou\Photos\">
+			</group>
+			<group name="Girls" url="C:\$DATA$\My Documents\My Pictures\Others\Arrières plan\Girls\">
+			</group>
+			<group name="San Francisco" url="C:\$DATA$\My Documents\My Pictures\Photos\2012\01-San Francisco\">
+			</group>
+		</groups>
+	</configuration>
+</parameters>
